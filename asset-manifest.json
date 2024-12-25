@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Pokemon-TCG-Opening-Simulator/static/css/main.6cf0fccf.css",
-    "main.js": "/Pokemon-TCG-Opening-Simulator/static/js/main.fa171605.js",
+    "main.js": "/Pokemon-TCG-Opening-Simulator/static/js/main.684a04c7.js",
     "static/js/453.cfc1f047.chunk.js": "/Pokemon-TCG-Opening-Simulator/static/js/453.cfc1f047.chunk.js",
     "static/media/back.png": "/Pokemon-TCG-Opening-Simulator/static/media/back.ab2db0a4832a01877528.png",
     "index.html": "/Pokemon-TCG-Opening-Simulator/index.html",
     "main.6cf0fccf.css.map": "/Pokemon-TCG-Opening-Simulator/static/css/main.6cf0fccf.css.map",
-    "main.fa171605.js.map": "/Pokemon-TCG-Opening-Simulator/static/js/main.fa171605.js.map",
+    "main.684a04c7.js.map": "/Pokemon-TCG-Opening-Simulator/static/js/main.684a04c7.js.map",
     "453.cfc1f047.chunk.js.map": "/Pokemon-TCG-Opening-Simulator/static/js/453.cfc1f047.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6cf0fccf.css",
-    "static/js/main.fa171605.js"
+    "static/js/main.684a04c7.js"
   ]
 }
