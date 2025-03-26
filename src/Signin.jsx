@@ -8,6 +8,9 @@ function Signin() {
     const [profile,setProfile] = useState(null);
     //https://cardsbackend.onrender.com/auth/google
     //http://localhost:3002/auth/google
+    const logingithub = ()=>{
+        window.open('http://localhost:3002/auth/github',"_self");
+    }
     const logingoogle = ()=>{
         window.open('http://localhost:3002/auth/google',"_self");
     };
@@ -15,6 +18,8 @@ function Signin() {
         try{
             const res = await axios.get('http://localhost:3001/profile',{withCredentials:true});
             setProfile(res.data.user);
+            console.log(profile);
+            
 
         }catch(error){
             console.error(error);
@@ -30,12 +35,12 @@ function Signin() {
                 <h2 className="mb-2.5">Sign In</h2>
                 <p className="text-sm mb-5">Choose a sign-in method below.</p>
                 <div className='gap-x-4'>
-                    <button class="w-[35%] p-2.5 m-[10px] rounded-3xl cursor-pointer text-[16px] text-white items-center justify-center inline-flex h-[75px] bg-[#333] hover:border-[3px] duration-25 hover:border-white" ><img className='h-[45px] rounded-full' src='github-mark.png' /> Sign in with GitHub</button>
+                    <button class="w-[35%] p-2.5 m-[10px] rounded-3xl cursor-pointer text-[16px] text-white items-center justify-center inline-flex h-[75px] bg-[#333] hover:border-[3px] duration-25 hover:border-white" onClick={logingithub}><img className='h-[45px] rounded-full' src='github-mark.png' /> Sign in with GitHub</button>
                     <button class="w-[35%] p-2.5 m-[10px] rounded-3xl cursor-pointer text-[16px] text-white items-center justify-center inline-flex h-[75px] bg-[#333] hover:border-[3px] duration-25 hover:border-white" onClick={logingoogle}><img className='h-[45px] rounded-full' src='google.webp' />Sign in with Google</button>
                 </div>
             </div>
             <button className=" w-[150px] p-2.5 rounded-3xl cursor-pointer text-[16px] text-white items-center justify-center flex h-[75px] bg-[#333] hover:border-[3px] duration-25 hover:border-white m-auto" onClick={()=>navigate('/')}>Main Menu</button></>):(<><h3>Welcome, {profile.name}</h3>
-                <p>Email: {profile.email}</p></>)}
+                <p>id: {profile.id}</p></>)}
            
         </div>
     );
