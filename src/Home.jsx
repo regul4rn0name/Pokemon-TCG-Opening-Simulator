@@ -1,31 +1,24 @@
 import { useNavigate } from 'react-router-dom';
-
-
-import axios from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
+import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link,
-    Outlet,
-  } from "react-router-dom";
 import Header from './Header';
-import Singin from './Signin';
 import HomeLoading from './HomeLoading';
 
 
+const instance = Axios.create();
+const axios = setupCache(instance);
+
 function Home() {
-  
+
   const [matches, setMatches] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    var cardsimg = [];
     useEffect(() => {
       setLoading(true);
       setError(null);
-      const source = axios.CancelToken.source();
-      axios.get(`http://localhost:3001/table`, { cancelToken: source.token }).then(response => {
+     const controller = new AbortController();
+      axios.get(`http://localhost:3001/table`, { signal:controller.signal }).then(response => {
       
           if (response.data ) {
             setMatches(response.data.rows)
@@ -34,8 +27,8 @@ function Home() {
             
           }
           else {
-            console.error('No data available at the random index.');
-            setMatches(null);
+            console.error('No data available.');
+            setMatches([]);
           }
         
   
@@ -43,21 +36,18 @@ function Home() {
       })
         .catch(error => {
           if (axios.isCancel(error)) {
-            console.log('Request canceled:', error.message);
-          } else {
-            console.error('Error fetching data:', error);
-            setError(error);
-            setMatches(null);
+            console.log('Request was canceled:', error.message);
+            return; // Exit early without setting error state
           }
+          console.error('Error fetching data:', error);
+          setError(error);
         })
         .finally(() => {
           setLoading(false);
         });
   
   
-      return () => {
-        source.cancel('Operation canceled by the user.');
-      };
+      return ()=>controller.abort();
   
   
   
@@ -68,7 +58,7 @@ function Home() {
     }
 
     return (
-      <div id="jajca" className='flex flex-wrap justify-center h-screen overflow-y-auto flex-grow text-white gap-x-5 gap-y-5 text-center bg-[rgb(29,29,29)]'>
+      <div id="jajca" className='flex flex-wrap justify-center h-screen overflow-y-auto flex-grow text-white gap-x-5 gap-y-5 text-center bg-[rgb(29,29,29)] '>
         {loading && <HomeLoading/>}
         {error && <div>Error: {error.message}</div>}
         {!loading && !error &&<Header/>}
