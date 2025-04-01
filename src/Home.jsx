@@ -22,7 +22,7 @@ function Home() {
       
           if (response.data ) {
             setMatches(response.data.rows)
-            console.log(response.data.rows);
+        
             
             
           }

@@ -25,12 +25,13 @@ function Signin() {
             }
         }else if(reftoken!=null){
             axios.post('http://localhost:3002/token',{},{withCredentials:true});
+            this.forceUpdate();
         }
         
     };
     useEffect(() => {
         fetchProfile();
-    }, [token]);
+    }, []);
 
     return (
         <div className='m-auto min-h-screen h-fit w-screen bg-[rgb(29,29,29)] items-center justify-center bg-gradient-to-b from-stone-900 to-neutral-700'>
