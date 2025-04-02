@@ -25,7 +25,7 @@ function Signin() {
             }
         }else if(reftoken!=null){
             axios.post('http://localhost:3002/token',{},{withCredentials:true});
-            this.forceUpdate();
+            location.reload();
         }
         
     };
