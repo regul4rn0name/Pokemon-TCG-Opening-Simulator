@@ -24,8 +24,14 @@ function Signin() {
     
             }
         }else if(reftoken!=null){
-            axios.post('http://localhost:3002/token',{},{withCredentials:true});
-            location.reload();
+            try {
+                await axios.post('http://localhost:3002/token',{},{withCredentials:true});
+                location.reload();
+            } catch (error) {
+                console.log(error);
+                
+            }
+           
         }
         
     };
