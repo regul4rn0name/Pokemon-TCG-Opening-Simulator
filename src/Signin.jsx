@@ -7,16 +7,17 @@ import Cookies from 'js-cookie';
 
 function Signin() {
     const navigate = useNavigate();
-    const [profile, setProfile] = useState(null);
+    const [profile, setProfile] = useState();
     const token = Cookies.get('token');
     const reftoken = Cookies.get('reftoken');
 
     const fetchProfile = async () => {
         if(token!=null){
             try {
-                const res = await axios.get('http://localhost:3001/profile', { withCredentials: true });
-                setProfile(res.data.user);
-                console.log(profile);
+                const res = await axios.get('http://localhost:3001/users', { withCredentials: true });
+                setProfile(res.data[0]);
+                console.log(res.data[0].CardsAmount);
+                
     
     
             } catch (error) {
