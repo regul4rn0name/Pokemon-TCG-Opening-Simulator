@@ -16,7 +16,7 @@ export default function Profile({ profile,cards }) {
                 ))}
             </div>
             
-            <div className="grid grid-cols-4 gap-4 items">
+            <div className="grid grid-cols-6 gap-4 items">
                {cards.map((card)=>(
                 <CardsStats card={card}/>
                ))}
