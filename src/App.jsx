@@ -4,6 +4,7 @@ import './App.css';
 import Open from './Open';
 import Home from './Home';
 import Signin from './Signin';
+import CardStats from './CardsStats';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/:open" element={<Open />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path='/test' element={<CardStats/>}/>
       </Routes>
     </Router>
   );

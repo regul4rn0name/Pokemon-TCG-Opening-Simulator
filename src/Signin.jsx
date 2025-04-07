@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 function Signin() {
     const navigate = useNavigate();
     const [profile, setProfile] = useState();
+    const [cards ,setCards] = useState([]);
     const token = Cookies.get('token');
     const reftoken = Cookies.get('reftoken');
 
@@ -15,8 +16,9 @@ function Signin() {
         if(token!=null){
             try {
                 const res = await axios.get('http://localhost:3001/users', { withCredentials: true });
-                setProfile(res.data[0]);
-                console.log(res.data[0].CardsAmount);
+                setProfile(res.data.data[0]);
+                setCards(res.data.fullCards);
+                console.log(res.data.fullCards);
                 
     
     
@@ -48,7 +50,7 @@ function Signin() {
                 <Login/>
             ):
             (
-                <Profile profile={profile}/>
+                <Profile profile={profile} cards={cards}/>
             )}
            
         </div>
