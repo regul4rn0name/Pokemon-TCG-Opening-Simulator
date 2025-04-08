@@ -20,6 +20,8 @@ function Open() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [stats,setStats] =  useState([]);
+  
   const table = useLocation().pathname;
   
   useEffect(() => {
