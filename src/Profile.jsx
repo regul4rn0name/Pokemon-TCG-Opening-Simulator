@@ -18,7 +18,7 @@ export default function Profile({ profile,cards }) {
             
             <div className="grid grid-cols-6 gap-4 items">
                {cards.map((card)=>(
-                <CardsStats card={card}/>
+                <CardsStats key={card._id} card={card}/>
                ))}
             </div>
             

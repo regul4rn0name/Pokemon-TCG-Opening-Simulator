@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Profile from "./Profile";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Cookies from 'js-cookie';
 
 function Signin() {
