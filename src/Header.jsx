@@ -1,10 +1,10 @@
 
 import { Navigate, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useAppContext } from './AppContext';
 
 function Header(){
     const navigate = useNavigate();
-    const profile  = Cookies.get('reftoken');
+    const profile  = useAppContext();
     
     return (
     

@@ -3,10 +3,12 @@ import Login from "./Login";
 import Profile from "./Profile";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { useAppContext } from "./AppContext";
 
 
-function Signin({profile,cards}) {
+function Signin() {
     const navigate = useNavigate();
+    const {profile} = useAppContext();
     
 
     return (
@@ -17,7 +19,7 @@ function Signin({profile,cards}) {
                 <Login/>
             ):
             (
-                <Profile profile={profile} cards={cards}/>
+                <Profile/>
             )}
            
         </div>

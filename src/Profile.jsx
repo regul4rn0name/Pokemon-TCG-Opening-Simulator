@@ -1,8 +1,9 @@
 import Signin from "./Signin";
 import CardsStats from "./CardsStats";
+import { useAppContext } from "./AppContext";
 
-export default function Profile({ profile,cards }) {
-
+export default function Profile() {
+    const {profile,cards} = useAppContext();
     return (<>
         <div className='bg-[#1E1E1E] p-8 rounded-[45px] shadow-[0_0_10px_rgba(255,255,255,0.1)] w-[80vw] text-center m-auto mt-[750px] mb-[50px] h-fit'>
             <h2 className="mb-2.5">Welcome {profile.name}!</h2>
