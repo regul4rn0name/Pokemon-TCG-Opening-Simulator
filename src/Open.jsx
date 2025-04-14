@@ -1,15 +1,14 @@
-
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { tab } from '@testing-library/user-event/dist/tab';
 import rarities from './rarities.json';
 import Card from './Card';
+import { useAppContext } from './AppContext';
 
 function Open() {
-  console.log(rarities);
+
   
   const getRandomInt=(max)=> {
     return Math.floor(Math.random() * max);
@@ -20,7 +19,10 @@ function Open() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [stats,setStats] =  useState([]);
+  const profile = useAppContext();
+  const CardsAmount = profile?.profile?.CardsAmount;
+  const [card,setCard]=useState([]);
+  
   
   const table = useLocation().pathname;
   
@@ -32,6 +34,11 @@ function Open() {
     
         if (response.data ) {
           setMatches(response.data.rows)
+          const cloned = response.data.rows.map(card => ({ ...card }));
+          setCard(cloned);
+          
+          
+          //console.log(matches);
           
           
         }
@@ -65,14 +72,24 @@ function Open() {
 
   }, [])
   const cards=document.getElementsByClassName("back");
-  matches.forEach((cards=>{
-    if(typeof cards.rarity!='number'){
-      cards.rarity = rarities[cards.rarity];
+  
+  
+  console.log(card);
+  
+  // matches.forEach((cards=>{
+  //   if(typeof cards.rarity!='number'){
+  //     cards.rarity = rarities[cards.rarity];
+  //   }else{
+      
+  //   }
+  // }));
+  for(let m of matches){
+    if(typeof m.rarity!='number'){
+      m.rarity = rarities[m.rarity];
     }
-  }));
-
-    
-    
+  }
+  console.log(matches);
+  
     
  
   
@@ -135,6 +152,12 @@ function Open() {
         }else{
           rand = getRandomInt(rarity5.length);
           cards[i].style.backgroundImage = `url(${rarity5[rand]['image']})`;
+          if(CardsAmount){
+            CardsAmount["ACE SPEC Rare"]++;
+
+
+          }
+          
         }
           
         }
@@ -148,7 +171,11 @@ function Open() {
             cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
           }else{
             rand = getRandomInt(rarity6.length);
-          cards[i].style.backgroundImage = `url(${rarity6[rand]['image']})`;
+            cards[i].style.backgroundImage = `url(${rarity6[rand]['image']})`;
+            
+
+            
+            
           }
           
         }
@@ -159,6 +186,7 @@ function Open() {
           }else{
             rand = getRandomInt(rarity8.length);
           cards[i].style.backgroundImage = `url(${rarity8[rand]['image']})`;
+
           }
           
         }
@@ -169,6 +197,7 @@ function Open() {
           }else{
             rand = getRandomInt(rarity9.length);
           cards[i].style.backgroundImage = `url(${rarity9[rand]['image']})`;
+
           }
           
         }
@@ -180,6 +209,11 @@ function Open() {
           if(rarity4.length!==0){
              rand = getRandomInt(rarity4.length);
           cards[i].style.backgroundImage = `url(${rarity4[rand]['image']})`;
+          const onecard = card.filter((c)=>c.id===rarity4[rand].id);
+          //console.log(onecard);
+          
+          // const cardrarity = onecard['rarity'];
+
           }else{
             rand = getRandomInt(rarity1.length)
             cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
@@ -190,6 +224,7 @@ function Open() {
           if(rarity7.length!==0){
             rand = getRandomInt(rarity7.length);
           cards[i].style.backgroundImage = `url(${rarity7[rand]['image']})`;
+
           
           }else{
             rand = getRandomInt(rarity1.length)
