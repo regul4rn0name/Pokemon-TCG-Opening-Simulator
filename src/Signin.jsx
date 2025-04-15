@@ -4,10 +4,18 @@ import Profile from "./Profile";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "./AppContext";
+import fetchProfile from "./fetchProfile";
+
 
 
 function Signin() {
     const navigate = useNavigate();
+    const { setProfile, setCards } = useAppContext();
+
+  useEffect(() => {
+    fetchProfile(setCards, setProfile);
+  }, []);
+
     const {profile} = useAppContext();
     
 

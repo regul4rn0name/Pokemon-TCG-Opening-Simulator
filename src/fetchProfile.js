@@ -16,6 +16,7 @@ async function fetchProfile(setCards, setProfile) {
                     return fetchProfile(setCards, setProfile);
                 }
             } catch (profileError) {
+                setProfile(null);
                 console.error(profileError);
             }
         } else {
