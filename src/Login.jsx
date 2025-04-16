@@ -1,11 +1,13 @@
 
 export default function Login() {
     const logingithub = () => {
-        window.open('https://ebloauth.duckdns.org/auth/auth/github', "_self");
+        window.location.href = 'https://ebloauth.duckdns.org/auth/auth/github';
     }
+    
     const logingoogle = () => {
-        window.open('https://ebloauth.duckdns.org/auth/auth/google', "_self");
+        window.location.href = 'https://ebloauth.duckdns.org/auth/auth/google';
     };
+    
     return (
         
             <div className='bg-[#1E1E1E] p-8 rounded-[45px] shadow-[0_0_10px_rgba(255,255,255,0.1)] w-[550px] text-center m-auto mb-[50px] absolute top-8 h-fit'>
