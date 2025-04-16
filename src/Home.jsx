@@ -18,7 +18,7 @@ function Home() {
       setLoading(true);
       setError(null);
      const controller = new AbortController();
-      axios.get(`http://localhost:3001/table`, { signal:controller.signal }).then(response => {
+      axios.get(`https://ebloauth.duckdns.org/table`, { signal:controller.signal }).then(response => {
       
           if (response.data ) {
             setMatches(response.data.rows)
@@ -66,7 +66,7 @@ function Home() {
           
           matches.map((table) => (
             <div key={table.name}>
-              <button className='md:w-[456px] md:h-[256px]  w-[456px] h-[256px] sm:h-[128px] sm:w-[233px] bg-no-repeat bg-contain bg-center bg-[rgb(22,34,73)] shadow-none border-[3px] border-[rgb(22,34,73)] rounded-2xl duration-25 hover:border-[#646cff]' 
+              <button className='md:w-[456px] md:h-[256px] mt-5  w-[456px] h-[256px] sm:h-[128px] sm:w-[233px] bg-no-repeat bg-contain bg-center bg-[rgb(22,34,73)] shadow-none border-[3px] border-[rgb(22,34,73)] rounded-2xl duration-25 hover:border-[#646cff]' 
                 onClick={() => handleRedirect(table.name)} 
                 style={{ backgroundImage: `url(${table.logo})` }}
               />

@@ -4,6 +4,9 @@ async function Push(CardsAmount,RareCards){
 
     try {
         const res = await axios.post('http://localhost:3001/updatecards',{CardsAmount,RareCards},{withCredentials:true});
+        console.log(CardsAmount);
+        console.log(RareCards);
+        
         
         
         console.log(res);
