@@ -1,11 +1,11 @@
 
 export default function Login() {
     const logingithub = () => {
-        window.location.href = 'https://ebloauth.duckdns.org/auth/auth/github';
+        window.location.href = 'https://pokemon-tcg-opening-simulator.jajca.site/server/auth/auth/github';
     }
     
     const logingoogle = () => {
-        window.location.href = 'https://ebloauth.duckdns.org/auth/auth/google';
+        window.location.href = 'https://pokemon-tcg-opening-simulator.jajca.site/server/auth/auth/google';
     };
     
     return (
