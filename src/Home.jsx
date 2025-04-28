@@ -83,7 +83,6 @@ function Home() {
     } else if (up && scrollRatio > 0.5) {
       setUp(false)
     }
-    console.log(up);
 
   }
   useEffect(() => {
@@ -101,7 +100,7 @@ function Home() {
     }
   },[search])
   return (
-    <div id="jajca" ref={windowRef} className='flex flex-wrap justify-center h-screen overflow-y-auto flex-grow text-white gap-x-5 gap-y-5 text-center bg-[rgb(29,29,29)] duration-25' onScroll={handlescroll}>
+    <div id="jajca" ref={windowRef} className='flex flex-wrap h-screen overflow-y-auto flex-grow text-white gap-x-5 gap-y-5 text-center bg-[rgb(29,29,29)] duration-25' onScroll={handlescroll}>
       {loading && <HomeLoading />}
       {error && <div>Error: {error.message}</div>}
       {!loading && !error && (<><Header />
@@ -112,25 +111,27 @@ function Home() {
       )}
       {!loading && !error && (
         <>
-          <div className='w-[80%] h-10 mt-2 bg-stone-800 z-10'>
-            <input type='text' placeholder='Find set u want' className='w-full text-center h-full' onChange={e=>setSearch(e.target.value)}/>
+          <div className='w-[50%] h-10 mt-2 ml-5 bg-stone-800 self-start justify-start items-start flex'>
+            <input type='text' placeholder='Find set u want' className='w-full text-left h-full' onChange={e=>setSearch(e.target.value)}/>
           </div>
 
           <AnimatePresence mode="popLayout">
+          <div className='flex justify-center flex-wrap overflow-y-auto text-white gap-x-5 w-full'>
   {sets.map((table) => (
     <motion.div
       key={table.name}
       layout
-      transition={{ duration: 0.25 }}
-    >
+      transition={{ duration: 0.33 }}
+   className='mb-5' >
       <button
-        className='md:w-[456px] md:h-[256px] mt-5 w-[456px] h-[256px] sm:h-[128px] sm:w-[233px] bg-no-repeat bg-contain bg-center bg-[rgb(22,34,73)] shadow-none border-[3px] border-[rgb(22,34,73)] rounded-2xl duration-25 hover:border-[#646cff]'
+        className='md:w-[456px] md:h-[256px] mt-5 w-[228px] h-[128px]  sm:h-[128px] sm:w-[223px] bg-no-repeat bg-contain bg-center md bg-[rgb(22,34,73)] shadow-none border-[3px] border-[rgb(22,34,73)] rounded-2xl duration-25 hover:border-[#646cff]'
         onClick={() => handleRedirect(table.name)}
         style={{ backgroundImage: `url(${table.logo})` }}
       />
       <p>{table.name}</p>
     </motion.div>
   ))}
+  </div>
 </AnimatePresence>
         </>
       )}
