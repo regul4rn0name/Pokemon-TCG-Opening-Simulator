@@ -31,7 +31,7 @@ function Open() {
     setLoading(true);
     setError(null);
     const source = axios.CancelToken.source();
-    axios.get(`http://localhost:3001${table}`, { cancelToken: source.token }).then(response => {
+    axios.get(`https://pokemon-tcg-opening-simulator.jajca.site/server${table}`, { cancelToken: source.token }).then(response => {
 
       if (response.data) {
         setMatches(response.data.rows)
