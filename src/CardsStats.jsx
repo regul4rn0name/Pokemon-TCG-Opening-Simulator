@@ -12,8 +12,8 @@ export default function CardStats({ card }) {
     <>
       <div className="grid md:grid-rows-2 grid-cols-1 gap-0 items-center md:mb-7">
         <p className="self-end">{card.name}</p>
-        <motion.div
-          layoutId={`card-${card._id}`}
+        <div
+
           onClick={toggleMagnify}
           className="w-[120px] h-[160px] duration-200 rounded-xl bg-cover bg-center m-auto md:mt-1 cursor-pointer"
           style={{ backgroundImage: `url(${card.image})` }}
@@ -28,13 +28,13 @@ export default function CardStats({ card }) {
             onClick={toggleMagnify}
           >
             <motion.div
-              layoutId={`card-${card._id}`}
+
               className="w-[240px] h-[320px] rounded-xl bg-cover bg-center shadow-xl cursor-pointer z-20"
               style={{ backgroundImage: `url(${card.image})` }}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.1 }}
+              transition={{ duration: 0.3 }}
             />
           </div>
         )}
