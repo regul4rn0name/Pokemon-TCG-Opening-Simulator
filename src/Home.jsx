@@ -112,7 +112,7 @@ function Home() {
       {!loading && !error && (
         <>
           <div className='w-[50%] h-10 mt-2 ml-5 bg-stone-800 self-start justify-start items-start flex'>
-            <input type='text' placeholder='Find set u want' className='w-full text-left h-full' onChange={e=>setSearch(e.target.value)}/>
+            <input type='text' placeholder='Find set u want' className='w-full text-left h-full pl-5' onChange={e=>setSearch(e.target.value)}/>
           </div>
 
           <AnimatePresence mode="popLayout">
