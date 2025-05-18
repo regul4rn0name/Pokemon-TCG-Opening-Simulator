@@ -21,7 +21,7 @@ function Open() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const {profile} = useAppContext();
+  const { profile } = useAppContext();
   const [card, setCard] = useState([]);
 
 
@@ -89,37 +89,37 @@ function Open() {
   const addimage = useCallback(() => {
     const CardsAmount = profile?.CardsAmount ?? {
       "Rare Holo": 0,
-                    "Rare Holo EX": 0,
-                    "Rare Holo GX": 0,
-                    "Rare Holo LV.X": 0,
-                    "Rare Holo Star": 0,
-                    "Rare Holo V": 0,
-                    "Rare Holo VMAX": 0,
-                    "Rare Holo VSTAR": 0,
-                    "Double Rare": 0,
-                    "Rare": 0,
-                    "ACE SPEC Rare": 0,
-                    "Amazing Rare": 0,
-                    "Radiant Rare": 0,
-                    "Classic Collection": 0,
-                    "Rare BREAK": 0,
-                    "Rare Prime": 0,
-                    "Rare Shining": 0,
-                    "Rare Shiny": 0,
-                    "Shiny Rare": 0,
-                    "Illustration Rare": 0,
-                    "Rare ACE": 0,
-                    "Rare Prism Star": 0,
-                    "Rare Ultra": 0,
-                    "Ultra Rare": 0,
-                    "LEGEND": 0,
-                    "Rare Shiny GX": 0,
-                    "Shiny Ultra Rare": 0,
-                    "Trainer Gallery Rare Holo": 0,
-                    "Special Illustration Rare": 0,
-                    "Rare Rainbow": 0,
-                    "Rare Secret": 0,
-                    "Hyper Rare": 0
+      "Rare Holo EX": 0,
+      "Rare Holo GX": 0,
+      "Rare Holo LV.X": 0,
+      "Rare Holo Star": 0,
+      "Rare Holo V": 0,
+      "Rare Holo VMAX": 0,
+      "Rare Holo VSTAR": 0,
+      "Double Rare": 0,
+      "Rare": 0,
+      "ACE SPEC Rare": 0,
+      "Amazing Rare": 0,
+      "Radiant Rare": 0,
+      "Classic Collection": 0,
+      "Rare BREAK": 0,
+      "Rare Prime": 0,
+      "Rare Shining": 0,
+      "Rare Shiny": 0,
+      "Shiny Rare": 0,
+      "Illustration Rare": 0,
+      "Rare ACE": 0,
+      "Rare Prism Star": 0,
+      "Rare Ultra": 0,
+      "Ultra Rare": 0,
+      "LEGEND": 0,
+      "Rare Shiny GX": 0,
+      "Shiny Ultra Rare": 0,
+      "Trainer Gallery Rare Holo": 0,
+      "Special Illustration Rare": 0,
+      "Rare Rainbow": 0,
+      "Rare Secret": 0,
+      "Hyper Rare": 0
     };
     if (!matches || matches.length === 0 || !CardsAmount) return;
 
@@ -141,86 +141,37 @@ function Open() {
       document.getElementById('buttons').style.display = 'none';
 
       switch (i) {
-        case 9:
+        case 9: case 8: case 7: case 6:
           rand = getRandomInt(rarity1.length);
           cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
           break;
-        case 8:
-          rand = getRandomInt(rarity1.length);
-          cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
-          break;
-        case 7:
-          rand = getRandomInt(rarity1.length);
-          cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
-          break;
-        case 6:
-          rand = getRandomInt(rarity1.length);
-          cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
-          break;
-        case 5:
-          rand = getRandomInt(rarity2.length);
-          cards[i].style.backgroundImage = `url(${rarity2[rand]['image']})`;
-          break;
-        case 4:
-          rand = getRandomInt(rarity2.length);
-          cards[i].style.backgroundImage = `url(${rarity2[rand]['image']})`;
-          break;
-        case 3:
+        case 5: case 4: case 3:
           rand = getRandomInt(rarity2.length);
           cards[i].style.backgroundImage = `url(${rarity2[rand]['image']})`;
           break;
         case 2:
-          rand = getRandomInt(rarity2.length);
-          cards[i].style.backgroundImage = `url(${rarity2[rand]['image']})`;
-          if (getRandomInt(20) === 0) {
-            if (rarity5.length === 0) {
-              rand = getRandomInt(rarity3.length)
-              cards[i].style.backgroundImage = `url(${rarity3[rand]['image']})`;
-              
-            } else {
-              rand = getRandomInt(rarity5.length);
-              cards[i].style.backgroundImage = `url(${rarity5[rand]['image']})`;
-
-
-              const onecard = card.filter((c) => c.id === rarity5[rand].id);
-              RareCards.push(onecard[0]);
-              CardsAmount["ACE SPEC Rare"]++;
-
-
-
-
-            }
-
+          if (getRandomInt(20) === 0 && rarity5?.length) {
+            rand = getRandomInt(rarity5.length);
+            cards[i].style.backgroundImage = `url(${rarity5[rand]['image']})`;
+            const onecard = card.filter((c) => c.id === rarity5[rand].id);
+            RareCards.push(onecard[0]);
+            CardsAmount["ACE SPEC Rare"]++;
+          } else {
+            rand = getRandomInt(rarity3.length)
+            cards[i].style.backgroundImage = `url(${rarity3[rand]['image']})`;
           }
           break;
         case 1:
-          rand = getRandomInt(rarity2.length);
-          cards[i].style.backgroundImage = `url(${rarity2[rand]['image']})`;
-          if (getRandomInt(6) === 0) {
-            if (rarity6.length === 0) {
-              rand = getRandomInt(rarity1.length)
-              cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
-            } else {
-              rand = getRandomInt(rarity6.length);
-              cards[i].style.backgroundImage = `url(${rarity6[rand]['image']})`;
-              const onecard = card.filter((c) => c.id === rarity6[rand].id);
+          if (getRandomInt(6) === 0 && rarity6?.length) {
+            rand = getRandomInt(rarity6.length);
+            cards[i].style.backgroundImage = `url(${rarity6[rand]['image']})`;
+            const onecard = card.filter((c) => c.id === rarity6[rand].id);
+            const cardrarity = onecard[0].rarity;
+            RareCards.push(onecard[0]);
+            CardsAmount[cardrarity]++;
+          } else
+            if (getRandomInt(20) === 0 && rarity8?.length) {
 
-
-              const cardrarity = onecard[0].rarity;
-              RareCards.push(onecard[0]);
-              CardsAmount[cardrarity]++;
-
-
-
-
-            }
-
-          }else
-          if (getRandomInt(20) === 0) {
-            if (rarity8.length === 0) {
-              rand = getRandomInt(rarity1.length)
-              cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
-            } else {
               rand = getRandomInt(rarity8.length);
               cards[i].style.backgroundImage = `url(${rarity8[rand]['image']})`;
               const onecard = card.filter((c) => c.id === rarity8[rand].id);
@@ -230,81 +181,74 @@ function Open() {
               RareCards.push(onecard[0]);
               CardsAmount[cardrarity]++;
 
-            }
-
-          }else
-          if (getRandomInt(30) === 0) {
-            if (rarity9.length === 0) {
-              rand = getRandomInt(rarity1.length)
-              cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
-            } else {
-              rand = getRandomInt(rarity9.length);
-              cards[i].style.backgroundImage = `url(${rarity9[rand]['image']})`;
-              const onecard = card.filter((c) => c.id === rarity9[rand].id);
 
 
-              const cardrarity = onecard[0].rarity;
-              RareCards.push(onecard[0]);
-              CardsAmount[cardrarity]++;
+            } else
+              if (getRandomInt(30) === 0 && rarity9?.length) {
+                rand = getRandomInt(rarity9.length);
+                cards[i].style.backgroundImage = `url(${rarity9[rand]['image']})`;
+                const onecard = card.filter((c) => c.id === rarity9[rand].id);
 
-            }
 
-          }
+                const cardrarity = onecard[0].rarity;
+                RareCards.push(onecard[0]);
+                CardsAmount[cardrarity]++;
+
+
+
+              } else {
+                rand = getRandomInt(rarity3.length)
+                cards[i].style.backgroundImage = `url(${rarity3[rand]['image']})`;
+              }
           break;
         case 0:
-          rand = getRandomInt(rarity3.length);
-          cards[i].style.backgroundImage = `url(${rarity3[rand]['image']})`;
-          if (/*getRandomInt(3)*/0 === 0) {
-            if (rarity4.length !== 0) {
-              rand = getRandomInt(rarity4.length);
-              cards[i].style.backgroundImage = `url(${rarity4[rand]['image']})`;
-              const onecard = card.filter((c) => c.id === rarity4[rand].id);
+          if (getRandomInt(3) === 0 && rarity4?.length) {
+
+            rand = getRandomInt(rarity4.length);
+            cards[i].style.backgroundImage = `url(${rarity4[rand]['image']})`;
+            const onecard = card.filter((c) => c.id === rarity4[rand].id);
 
 
-              const cardrarity = onecard[0].rarity;
-              RareCards.push(onecard[0]);
-              CardsAmount[cardrarity]++;
-
+            const cardrarity = onecard[0].rarity;
+            RareCards.push(onecard[0]);
+            CardsAmount[cardrarity]++;
 
 
 
-            } else {
-              rand = getRandomInt(rarity1.length)
-              cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
-            }
-
-          }else if (getRandomInt(10) === 0) {
-            if (rarity7.length !== 0) {
-              rand = getRandomInt(rarity7.length);
-              cards[i].style.backgroundImage = `url(${rarity7[rand]['image']})`;
-              const onecard = card.filter((c) => c.id === rarity7[rand].id);
 
 
-              const cardrarity = onecard[0].rarity;
-              RareCards.push(onecard[0]);
-              CardsAmount[cardrarity]++;
+
+          } else if (getRandomInt(10) === 0 && rarity7?.length) {
+
+            rand = getRandomInt(rarity7.length);
+            cards[i].style.backgroundImage = `url(${rarity7[rand]['image']})`;
+            const onecard = card.filter((c) => c.id === rarity7[rand].id);
 
 
-            } else {
-              rand = getRandomInt(rarity1.length)
-              cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
-            }
+            const cardrarity = onecard[0].rarity;
+            RareCards.push(onecard[0]);
+            CardsAmount[cardrarity]++;
 
 
+
+
+
+          } else {
+            rand = getRandomInt(rarity3.length);
+            cards[i].style.backgroundImage = `url(${rarity3[rand]['image']})`;
           }
           break;
 
       }
-      
-      
+
+
     }
-    Push(CardsAmount,RareCards);
+    Push(CardsAmount, RareCards);
   });
   useEffect(() => {
 
     addimage();
-  }, [matches,profile])
-  //addimage();
+  }, [matches, profile])
 
   return (
     <div>
