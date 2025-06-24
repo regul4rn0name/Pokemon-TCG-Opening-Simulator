@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext,useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import rarities from './rarities.json';
 import Card from './Card';
@@ -23,7 +23,11 @@ function Open() {
   const [error, setError] = useState(null);
   const { profile } = useAppContext();
   const [card, setCard] = useState([]);
-
+  const cards = useRef([]);
+  const buttons = useRef(null);
+  const addRef = (index)=>(el)=>{
+    cards.current[index] = el;
+  }
 
   const table = useLocation().pathname;
 
@@ -31,7 +35,8 @@ function Open() {
     setLoading(true);
     setError(null);
     const source = axios.CancelToken.source();
-    axios.get(`https://pokemon-tcg-opening-simulator.jajca.site/server${table}`, { cancelToken: source.token }).then(response => {
+    //https://pokemon-tcg-opening-simulator.jajca.site/server
+    axios.get(`http://localhost:3001${table}`, { cancelToken: source.token }).then(response => {
 
       if (response.data) {
         setMatches(response.data.rows)
@@ -72,7 +77,7 @@ function Open() {
 
 
   }, [])
-  const cards = document.getElementsByClassName("back");
+  
 
 
 
@@ -122,7 +127,8 @@ function Open() {
       "Hyper Rare": 0
     };
     if (!matches || matches.length === 0 || !CardsAmount) return;
-
+    
+   buttons.current.style.display = 'none';
     const RareCards = [];
     const rarity1 = matches.filter(obj => obj.rarity === 1);
     const rarity2 = matches.filter(obj => obj.rarity === 2);
@@ -134,37 +140,35 @@ function Open() {
     const rarity8 = matches.filter(obj => obj.rarity === 8);
     const rarity9 = matches.filter(obj => obj.rarity === 9);
     var rand;
-    var flipper = document.getElementsByClassName("flipper");
-    for (let i = 0; i < cards.length; i++) {
-      flipper[i].style.display = 'flex';
-      flipper[i].style.opacity = '100';
-      document.getElementById('buttons').style.display = 'none';
+    for (let i = 0; i < cards.current.length; i++) {
+      cards.current[i].flipper.style.display = 'flex';
+      cards.current[i].flipper.style.opacity = '100';
 
       switch (i) {
         case 9: case 8: case 7: case 6:
           rand = getRandomInt(rarity1.length);
-          cards[i].style.backgroundImage = `url(${rarity1[rand]['image']})`;
+          cards.current[i].cards.style.backgroundImage = `url(${rarity1[rand]['image']})`;
           break;
         case 5: case 4: case 3:
           rand = getRandomInt(rarity2.length);
-          cards[i].style.backgroundImage = `url(${rarity2[rand]['image']})`;
+          cards.current[i].cards.style.backgroundImage = `url(${rarity2[rand]['image']})`;
           break;
         case 2:
           if (getRandomInt(20) === 0 && rarity5?.length) {
             rand = getRandomInt(rarity5.length);
-            cards[i].style.backgroundImage = `url(${rarity5[rand]['image']})`;
+            cards.current[i].cards.style.backgroundImage = `url(${rarity5[rand]['image']})`;
             const onecard = card.filter((c) => c.id === rarity5[rand].id);
             RareCards.push(onecard[0]);
             CardsAmount["ACE SPEC Rare"]++;
           } else {
             rand = getRandomInt(rarity3.length)
-            cards[i].style.backgroundImage = `url(${rarity3[rand]['image']})`;
+            cards.current[i].cards.style.backgroundImage = `url(${rarity3[rand]['image']})`;
           }
           break;
         case 1:
           if (getRandomInt(6) === 0 && rarity6?.length) {
             rand = getRandomInt(rarity6.length);
-            cards[i].style.backgroundImage = `url(${rarity6[rand]['image']})`;
+            cards.current[i].cards.style.backgroundImage = `url(${rarity6[rand]['image']})`;
             const onecard = card.filter((c) => c.id === rarity6[rand].id);
             const cardrarity = onecard[0].rarity;
             RareCards.push(onecard[0]);
@@ -173,7 +177,7 @@ function Open() {
             if (getRandomInt(20) === 0 && rarity8?.length) {
 
               rand = getRandomInt(rarity8.length);
-              cards[i].style.backgroundImage = `url(${rarity8[rand]['image']})`;
+              cards.current[i].cards.style.backgroundImage = `url(${rarity8[rand]['image']})`;
               const onecard = card.filter((c) => c.id === rarity8[rand].id);
 
 
@@ -186,7 +190,7 @@ function Open() {
             } else
               if (getRandomInt(30) === 0 && rarity9?.length) {
                 rand = getRandomInt(rarity9.length);
-                cards[i].style.backgroundImage = `url(${rarity9[rand]['image']})`;
+                cards.current[i].cards.style.backgroundImage = `url(${rarity9[rand]['image']})`;
                 const onecard = card.filter((c) => c.id === rarity9[rand].id);
 
 
@@ -198,14 +202,14 @@ function Open() {
 
               } else {
                 rand = getRandomInt(rarity3.length)
-                cards[i].style.backgroundImage = `url(${rarity3[rand]['image']})`;
+                cards.current[i].cards.style.backgroundImage = `url(${rarity3[rand]['image']})`;
               }
           break;
         case 0:
           if (getRandomInt(3) === 0 && rarity4?.length) {
 
             rand = getRandomInt(rarity4.length);
-            cards[i].style.backgroundImage = `url(${rarity4[rand]['image']})`;
+            cards.current[i].cards.style.backgroundImage = `url(${rarity4[rand]['image']})`;
             const onecard = card.filter((c) => c.id === rarity4[rand].id);
 
 
@@ -221,7 +225,7 @@ function Open() {
           } else if (getRandomInt(10) === 0 && rarity7?.length) {
 
             rand = getRandomInt(rarity7.length);
-            cards[i].style.backgroundImage = `url(${rarity7[rand]['image']})`;
+            cards.current[i].cards.style.backgroundImage = `url(${rarity7[rand]['image']})`;
             const onecard = card.filter((c) => c.id === rarity7[rand].id);
 
 
@@ -235,7 +239,7 @@ function Open() {
 
           } else {
             rand = getRandomInt(rarity3.length);
-            cards[i].style.backgroundImage = `url(${rarity3[rand]['image']})`;
+            cards.current[i].cards.style.backgroundImage = `url(${rarity3[rand]['image']})`;
           }
           break;
 
@@ -257,18 +261,18 @@ function Open() {
       <Header />
 
       <div className='block'>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Card ref={addRef(0)}/>
+        <Card ref={addRef(1)}/>
+        <Card ref={addRef(2)}/>
+        <Card ref={addRef(3)}/>
+        <Card ref={addRef(4)}/>
+        <Card ref={addRef(5)}/>
+        <Card ref={addRef(6)}/>
+        <Card ref={addRef(7)}/>
+        <Card ref={addRef(8)}/>
+        <Card ref={addRef(9)}/>
       </div>
-      <div className='hidden gap-x-7 text-lg' id='buttons' >
+      <div className='hidden gap-x-7 text-lg' id='buttons'  ref={buttons}>
         <button onClick={() => navigate("/")} className='text-white rounded-3xl h-[75px] w-[150px] bg-[rgb(77,76,76)] hover:border-white hover:border-[3px] duration-25'>Main Menu</button>
         <button onClick={addimage} className='text-white rounded-3xl h-[75px] w-[150px] bg-[rgb(77,76,76)] hover:border-white hover:border-[3px] duration-25 '>Open Again</button>
       </div>

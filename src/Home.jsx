@@ -24,7 +24,8 @@ function Home() {
     setLoading(true);
     setError(null);
     const controller = new AbortController();
-    axios.get(`https://pokemon-tcg-opening-simulator.jajca.site/server/table`, { signal: controller.signal }).then(response => {
+    //https://pokemon-tcg-opening-simulator.jajca.site/server/
+    axios.get(`http://localhost:3001/table`, { signal: controller.signal }).then(response => {
 
       if (response.data) {
         setMatches(response.data.rows)
