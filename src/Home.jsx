@@ -25,7 +25,8 @@ function Home() {
     setError(null);
     const controller = new AbortController();
     //https://pokemon-tcg-opening-simulator.jajca.site/server/
-    axios.get(`http://localhost:3001/table`, { signal: controller.signal }).then(response => {
+    //http://localhost:3001/
+    axios.get(`https://pokemon-tcg-opening-simulator.jajca.site/server/table`, { signal: controller.signal }).then(response => {
 
       if (response.data) {
         setMatches(response.data.rows)
@@ -101,7 +102,7 @@ function Home() {
     }
   },[search])
   return (
-    <div id="jajca" ref={windowRef} className='flex flex-wrap h-screen overflow-y-auto flex-grow text-white gap-x-5 gap-y-5 text-center bg-[rgb(255,255,255)] duration-25' onScroll={handlescroll}>
+    <div id="jajca" ref={windowRef} className='flex flex-wrap h-screen overflow-y-auto flex-grow text-white gap-x-5 gap-y-5 text-center bg-[rgb(29,29,29)] duration-25' onScroll={handlescroll}>
       {loading && <HomeLoading />}
       {error && <div>Error: {error.message}</div>}
       {!loading && !error && (<><Header />
